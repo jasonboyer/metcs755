@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/WikiSpeciesIterator"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
+<booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.apache.hadoop.util.RunJar"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="${workspace_loc:/WikiSpeciesIterator/build/libs/WikiSpeciesIterator-1.0.jar} U.CC.SpeciesIterDriver2 ${workspace_loc:/WikiSpeciesXML/output} output 0.5"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="WikiSpeciesIterator"/>
+</launchConfiguration>
