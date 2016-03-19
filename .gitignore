@@ -1,0 +1,13 @@
+.DS_Store
+.class
+.classpath
+.gradle/
+.metadata/
+.project
+.recommenders/
+.settings/
+bin/
+build/
+intermediate/
+output*/
+.part*
