@@ -8,6 +8,6 @@
 </listAttribute>
 <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.apache.hadoop.util.RunJar"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="${workspace_loc:/WikiSpeciesXML/build/libs/WikiSpeciesMed-1.0.jar}  U.CC.SpeciesGraphBuilder input output"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="${workspace_loc:/WikiSpeciesXML/build/libs/WikiSpeciesXML-1.0.jar}  U.CC.SpeciesGraphBuilder input_huge output_huge"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="WikiSpeciesXML"/>
 </launchConfiguration>
