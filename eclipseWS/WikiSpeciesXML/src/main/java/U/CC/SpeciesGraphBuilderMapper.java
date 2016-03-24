@@ -48,57 +48,68 @@ public class SpeciesGraphBuilderMapper extends MapReduceBase implements Mapper<L
 
 	private int skipCrap(int start, String page) {
 		// Skip crap
-		while (start < page.length() && (page.charAt(start) == '\'' || page.charAt(start) == ' ' || page.charAt(start) == '\t' || page.charAt(start) == '\n'))
+		while (start < page.length() && 
+				(page.charAt(start) == '\'' || 
+				 page.charAt(start) == ' ' || 
+				 page.charAt(start) == '\t' || 
+				 page.charAt(start) == '\n' ||
+				 page.charAt(start) == '*'
+				 ))
 			start++;
 		return start;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void map(LongWritable key, Text value, 
 	                   OutputCollector output, Reporter reporter) throws IOException
 	{
 	  
-	     //===============================================
-	     //              XML Code
-	     //===============================================
+		try {
+			//===============================================
+			//              XML Code
+			//===============================================
 	
-		ArrayList<String> outlinks = new ArrayList<String>(); 
-		String title = null;
-		boolean found = false;
-		
-		Matcher match = regex1.matcher(value.toString());
-		while (match.find()) {
-			String page = match.group();
-			System.out.println("Page:" + page); 
-			getLinks(page, outlinks);
-		}
-	
-		match = regex2.matcher(value.toString());
-		while (match.find()) {
-			String page = match.group();
-			title = GetTitle(page);
-			addTitle();
+			ArrayList<String> outlinks = new ArrayList<String>(); 
+			String title = null;
+			boolean found = false;
 			
-			// TODO: why is this here?
-			// found = true;
-			//getLinks(page, outlinks);
+			Matcher match = regex1.matcher(value.toString());
+			while (match.find()) {
+				String page = match.group();
+				System.out.println("Page:" + page); 
+				getLinks(page, outlinks);
+			}
+		
+			match = regex2.matcher(value.toString());
+			while (match.find()) {
+				String page = match.group();
+				title = GetTitle(page);
+				addTitle();
+				
+				// TODO: why is this here?
+				// found = true;
+				//getLinks(page, outlinks);
+			}
+	
+			if (title != null && title.length() > 0) { 
+				reporter.setStatus(title); 
+			} else {
+				// Don't continue without a name for this species
+				return;
+			}
+		  
+			//ArrayList<String> outlinks = this.GetOutlinks(page); 
+			StringBuilder builder = new StringBuilder(); 
+			for (String link : outlinks) { 
+				link = link.replace(" ", "_"); 
+				link = link.replace(":", "_");
+				builder.append(" "); 
+				builder.append(link); 
+			} 
+			output.collect(new Text(title), new Text(builder.toString())); 
+		} catch (Exception e) {
+			System.out.println("Mapper caught exception, count = " + String.valueOf(countTitles) + ", text = " + value.toString() + ", exception: " + e);
 		}
-
-		if (title != null && title.length() > 0) { 
-			reporter.setStatus(title); 
-		} else {
-			// Don't continue without a name for this species
-			return;
-		}
-	  
-		//ArrayList<String> outlinks = this.GetOutlinks(page); 
-		StringBuilder builder = new StringBuilder(); 
-		for (String link : outlinks) { 
-			link = link.replace(" ", "_"); 
-			link = link.replace(":", "_");
-			builder.append(" "); 
-			builder.append(link); 
-		} 
-		output.collect(new Text(title), new Text(builder.toString())); 
 	} 
 	  
 	public String GetTitle(String page) throws IOException{ 

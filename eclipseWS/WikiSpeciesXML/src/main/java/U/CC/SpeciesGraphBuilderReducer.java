@@ -32,14 +32,14 @@ package U.CC;
      reporter.setStatus(key.toString()); 
      String toWrite = ""; 
      //int count = 0;
-     Double initPageRank = 0.0;
+     Double initPageRank = 0.1;
 
      while (values.hasNext()) 
      { 
         String page = ((Text)values.next()).toString(); 
         page.replaceAll(" ", "_"); 
         toWrite += " " + page; 
-        initPageRank += 0.1;
+        // initPageRank += 0.1;
      } 
 
      //while (values.hasNext())
